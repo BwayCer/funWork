@@ -1,0 +1,56 @@
+.table {
+	width:100%;
+	border-collapse: collapse;
+	border:1px solid #999;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	line-height: 1.5em;
+}
+
+.table thead th, .table td.head {
+	cursor: default;
+	font-weight:normal;
+	text-align:center;
+	white-space:nowrap;
+	border:1px solid #D0E1E0;
+	background-color: #E1E7F4;
+
+}
+body.no-touch .table thead th:hover {
+	background-color:#CCCCFF;
+	-webkit-transition: background-color .1s linear;
+}
+
+.table tbody tr {
+	background-color:#FFFFFF;
+	cursor: default;
+}
+.table tbody tr:nth-child(even) {
+	background-color:#F2F2F2;
+}
+.table tbody tr.selected {
+	background-color:#FFC67C;
+	-webkit-transition: background-color .1s linear;
+}
+.table tbody tr.light {
+	background-color:#FFE97F;
+}
+.table tbody td.light {
+	/*background-color:#FFE97F;*/
+}
+.table tbody tr td {
+	border:1px solid #e7e7e7;
+	white-space:nowrap;
+	padding: 2px 4px 2px 4px;
+}
+
+.table tbody tr td.SID {
+	text-align:center;
+}
+.table tbody tr td.NAME {
+	text-align:center;
+}
+.table tbody tr td.price {
+	text-align:right;
+}
