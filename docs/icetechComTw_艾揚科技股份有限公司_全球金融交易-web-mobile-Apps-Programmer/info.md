@@ -11,7 +11,9 @@
 ## 試題
 
 
-1. 下載試題壓縮檔 https://goo.gl/nG2pvB 。
+1. 下載試題
+[【此提交點】](https://github.com/BwayCer/funWork/tree/44c17b288189c905536def5b39212a6574a658a2/docs/icetechComTw_艾揚科技股份有限公司_全球金融交易-web-mobile-Apps-Programmer/reply)
+。
 1. 編輯 `js/main.js` 以完成以下需求：
   * 使用 `ajax` 取得 **data/data1.json**、**data2.json**、**data3.json** 。
   * 三份資料皆取得後，以 **data1** 的資料為主體產生表格。
