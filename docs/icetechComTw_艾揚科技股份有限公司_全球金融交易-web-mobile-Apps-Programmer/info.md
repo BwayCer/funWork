@@ -33,5 +33,9 @@
 
 **範例：**
 
-https://youtu.be/ZdhI-JRHY5w
+<iframe src="https://www.youtube.com/embed/ZdhI-JRHY5w"
+    frameborder="0"
+    allowfullscreen=""
+    style="width: 100%; max-width: 640px; height: 360px;"
+></iframe>
 
