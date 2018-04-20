@@ -126,32 +126,44 @@ function () {
      */
     dataATable.prototype.handleJoinData = function ( arrTxtList ) {
         var valTime = +new Date();
-        var idx, len, val;
+        var idx, len, val, valKey, valCell4;
         var [ dataA, dataB, dataC ] = arrTxtList;
         var keyList = [];
         var c4List = [];
-        var c8List = [];
-        var c9List = [];
-        var dataInfo = { dataA, c8List, c9List };
+        var dataTable = []
 
         for ( idx = 0, len = dataA.length; idx < len ; idx++ ) {
             val = dataA[ idx ];
-            keyList[ idx ] = val.key;
-            c4List[ idx ] = val.cell4;
+            valKey = val.key;
+            valCell4 = val.cell4;
+
+            keyList[ idx ] = valKey;
+            c4List[ idx ] = valCell4;
+            dataTable[ idx ] = [
+                valKey,
+                val[ 'cell1' ],
+                val[ 'cell2' ],
+                val[ 'cell3' ],
+                valCell4,
+                val[ 'cell5' ],
+                val[ 'cell6' ],
+                val[ 'cell7' ],
+                null, null
+            ];
         }
 
         for ( idx = 0, len = dataB.length; idx < len ; idx++ ) {
             val = dataB[ idx ];
-            c8List[ keyList.indexOf( val.key ) ] = val.cell8;
+            dataTable[ keyList.indexOf( val.key ) ][ 8 ] = val.cell8;
         }
 
         for ( idx in dataC ) {
             val = dataC[ idx ];
-            c9List[ c4List.indexOf( val.cell4 ) ] = val.cell9;
+            dataTable[ c4List.indexOf( val.cell4 ) ][ 9 ] = val.cell9;
         }
 
         console.log( 'handleJoinData 完成耗時：' + ( +new Date - valTime ) );
-        return dataInfo;
+        return dataTable;
     };
 
     /**
@@ -160,13 +172,12 @@ function () {
      * @memberof dataATable#
      * @func handleTableContent
      * @param {HTMLElement} table - 顯示資料的 <table> 標籤元素。
-     * @param {Object} dataInfo - {@link dataATable#handleJoinData} 的回傳值。
+     * @param {Array} dataTable - {@link dataATable#handleJoinData} 的回傳值。
      */
-    dataATable.prototype.handleTableContent = function ( helTable, objDataInfo ) {
+    dataATable.prototype.handleTableContent = function ( helTable, arrDataTable ) {
         var valTime = +new Date();
-        var idx, len, valA, val8, val9;
+        var idx, len, val;
         var tmpTr, helTd_key;
-        var { dataA, c8List, c9List } = objDataInfo;
         var helTbody = helTable.querySelector( 'tbody' );
         var helPositioning = document.createTextNode( '' );
         var helNodeList = document.createDocumentFragment();
@@ -183,22 +194,20 @@ function () {
             return helTerget;
         }
 
-        for ( idx = 0, len = c8List.length; idx < len; idx++ ) {
-            valA = dataA[ idx ];
-            val8 = c8List[ idx ];
-            val9 = c9List[ idx ];
+        for ( idx = 0, len = arrDataTable.length; idx < len; idx++ ) {
+            val = arrDataTable[ idx ];
 
             tmpTr = helTr.cloneNode();
-            tmpTr.appendChild( newTd( helTd_key.cloneNode( true ), valA[ 'key' ] ) );
-            tmpTr.appendChild( newTd( helTd.cloneNode(), valA[ 'cell1' ] ) );
-            tmpTr.appendChild( newTd( helTd.cloneNode(), valA[ 'cell2' ] ) );
-            tmpTr.appendChild( newTd( helTd.cloneNode(), valA[ 'cell3' ] ) );
-            tmpTr.appendChild( newTd( helTd.cloneNode(), valA[ 'cell4' ] ) );
-            tmpTr.appendChild( newTd( helTd.cloneNode(), valA[ 'cell5' ] ) );
-            tmpTr.appendChild( newTd( helTd.cloneNode(), valA[ 'cell6' ] ) );
-            tmpTr.appendChild( newTd( helTd.cloneNode(), valA[ 'cell7' ] ) );
-            tmpTr.appendChild( newTd( helTd.cloneNode(), val8 ) );
-            tmpTr.appendChild( newTd( helTd.cloneNode(), val9 ) );
+            tmpTr.appendChild( newTd( helTd_key.cloneNode( true ), val[ 0 ] ) );
+            tmpTr.appendChild( newTd( helTd.cloneNode(), val[ 1 ] ) );
+            tmpTr.appendChild( newTd( helTd.cloneNode(), val[ 2 ] ) );
+            tmpTr.appendChild( newTd( helTd.cloneNode(), val[ 3 ] ) );
+            tmpTr.appendChild( newTd( helTd.cloneNode(), val[ 4 ] ) );
+            tmpTr.appendChild( newTd( helTd.cloneNode(), val[ 5 ] ) );
+            tmpTr.appendChild( newTd( helTd.cloneNode(), val[ 6 ] ) );
+            tmpTr.appendChild( newTd( helTd.cloneNode(), val[ 7 ] ) );
+            tmpTr.appendChild( newTd( helTd.cloneNode(), val[ 8 ] ) );
+            tmpTr.appendChild( newTd( helTd.cloneNode(), val[ 9 ] ) );
             helNodeList.appendChild( tmpTr );
         }
 
@@ -221,8 +230,8 @@ function () {
         var self = this;
         this.getData( function ( arrTxtList ) {
             var valTime = +new Date();
-            var dataInfo = self.handleJoinData( arrTxtList );
-            self.handleTableContent( self._helTable, dataInfo );
+            var dataTable = self.handleJoinData( arrTxtList );
+            self.handleTableContent( self._helTable, dataTable );
             self._helUsage.innerText = +new Date() - valTime;
         } );
     };
