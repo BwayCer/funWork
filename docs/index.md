@@ -14,6 +14,9 @@
 
 * 艾揚科技股份有限公司
   * 全球金融交易 web/mobile Apps Programmer：
-      [資訊](https://bwaycer.github.io/funWork/icetechComTw_艾揚科技股份有限公司_全球金融交易-web-mobile-Apps-Programmer/info)
-      、 [作答](https://bwaycer.github.io/funWork/icetechComTw_艾揚科技股份有限公司_全球金融交易-web-mobile-Apps-Programmer/reply)
+    [資訊](./icetechComTw_艾揚科技股份有限公司_全球金融交易-web-mobile-Apps-Programmer/info.md)
+    、 [作答](./icetechComTw_艾揚科技股份有限公司_全球金融交易-web-mobile-Apps-Programmer/reply.md)
+* 火星區塊鏈有限公司
+  * 前端軟體工程師：
+    [資訊](./marsblockchainCom_火星區塊鏈有限公司_前端軟體工程師/info.md)
 
