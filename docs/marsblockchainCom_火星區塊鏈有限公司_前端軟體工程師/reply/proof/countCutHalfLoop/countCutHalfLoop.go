@@ -19,6 +19,12 @@ func main() {
 		theValue = NumberMaxInt
 		placeholderSpace = len(strconv.Itoa(theValue))
 	}
+
+	if theValue < 0 {
+		fmt.Println("負值無法計算。")
+		return
+	}
+
 	if len(argv) > 1 && argv[1] != "" {
 		theQuantity, _ = strconv.Atoi(argv[1])
 	} else {
@@ -28,9 +34,6 @@ func main() {
 		theQuantity = len(strconv.FormatInt(int64(theValue), 2)) + 1
 	}
 
-	if theValue < 0 {
-		fmt.Println("負值無法計算。")
-	}
 	switch theValue {
 	case 0:
 		fmt.Println("共計被裁切個數為： 0")
