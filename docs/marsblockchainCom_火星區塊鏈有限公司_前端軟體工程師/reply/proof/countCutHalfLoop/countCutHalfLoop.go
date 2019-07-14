@@ -23,7 +23,9 @@ func main() {
 		theQuantity, _ = strconv.Atoi(argv[1])
 	} else {
 		// TODO 最大可被裁切數
-		theQuantity = NumberMaxInt >> 1
+		// 以 "除以 2 仍不為 0 的個數 + 1" 的值暫代，
+		// 因為 make([]int, leng, capa) 的 capa 的值無法過大
+		theQuantity = len(strconv.FormatInt(int64(theValue), 2)) + 1
 	}
 
 	if theValue < 0 {
@@ -31,37 +33,41 @@ func main() {
 	}
 	switch theValue {
 	case 0:
-		fmt.Println("共計被裁切數為 0 個。")
+		fmt.Println("共計被裁切個數為： 0")
 	case 1, 2:
 		fmt.Printf(" %d = %d\n", theValue, theValue)
-		fmt.Println("共計被裁切數為 1 個。")
+		fmt.Printf("%#v\n", []int{theValue})
+		fmt.Printf("共計被裁切個數為： %d\n", theValue)
 	default:
-		loop := 0
-		var tmpNewVal, tmpAnotherVal int
+		listIdx := 0
+		list := make([]int, 0, theQuantity)
+		var tmpNewVal, tmpAnotherAnsVal int
 		tmpPlaceholderSpace := strconv.Itoa(placeholderSpace)
 		tmpPrintFomat := " %" + tmpPlaceholderSpace + "d = %" + tmpPlaceholderSpace + "d + %" + tmpPlaceholderSpace + "d\n"
 
-		for val, leng := theValue, theQuantity; loop < leng; loop++ {
+		for val, leng := theValue, theQuantity-1; listIdx < leng; listIdx++ {
+			if val < 3 {
+				fmt.Println("(use break from for loop.)")
+				break
+			}
+
 			tmpNewVal = val >> 1
 
 			if val%2 == 0 {
-				tmpAnotherVal = tmpNewVal + 1
+				tmpAnotherAnsVal = tmpNewVal + 1
 				tmpNewVal = tmpNewVal - 1
 			} else {
-				tmpAnotherVal = tmpNewVal + 1
+				tmpAnotherAnsVal = tmpNewVal + 1
 			}
 
-			fmt.Printf(tmpPrintFomat, val, tmpNewVal, tmpAnotherVal)
+			fmt.Printf(tmpPrintFomat, val, tmpNewVal, tmpAnotherAnsVal)
+			list = append(list, tmpAnotherAnsVal)
 			val = tmpNewVal
-
-			if val < 3 {
-				// NOTE 因為是手動退出，故需補上本次的運行次數
-				loop++
-				break
-			}
 		}
 
-		fmt.Printf("共計被裁切數為 %d 個。\n", loop*2)
+		list = append(list, tmpNewVal)
+		fmt.Printf("%#v\n", list)
+		fmt.Printf("共計被裁切個數為： %d\n", listIdx+1)
 	}
 }
 
