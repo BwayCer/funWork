@@ -40,7 +40,7 @@ func main() {
 	case 1, 2:
 		fmt.Printf(" %d = %d\n", theValue, theValue)
 		fmt.Printf("%#v\n", []int{theValue})
-		fmt.Printf("共計被裁切個數為：     %d\n", theValue)
+		fmt.Println("共計被裁切個數為：     1")
 	default:
 		listIdx := 0
 		list := make([]int, 0, theQuantity)
